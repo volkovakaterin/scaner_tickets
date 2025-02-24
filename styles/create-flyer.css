@@ -1,6 +1,6 @@
 .create_flyer {
   background: white;
-  min-height: calc(100vh - 90px);
+  min-height: calc(100vh - 58px);
   padding: 0;
 }
 
@@ -43,7 +43,7 @@
   height: 40px;
   display: flex;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 .poster_load_text.hidden {
@@ -85,11 +85,26 @@
 .create_flyer .qr-icon {
   position: relative;
   width: 60%;
-  aspect-ratio: 1 / 1;
+  /* aspect-ratio: 1 / 1; */
   border: 5px solid var(--primary-blue);
   border-radius: 20px;
-  padding: 25px;
+  /* padding: 25px; */
   color: #333;
+}
+
+.qr-icon::before {
+  content: "";
+  display: block;
+  padding-top: 100%; /* соотношение 1:1 */
+}
+
+.create_flyer .qr-icon svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 25px;
 }
 
 .create_flyer .qr-icon svg path {
@@ -114,7 +129,7 @@
   padding: 5px;
   border: 2px solid var(--primary-blue);
   background: white;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 .create_flyer .settings_open {
