@@ -13,8 +13,6 @@ const qrIconSvg = qrIconEl.querySelector("svg");
 const inputQrBorderColor = document.getElementById("qr-border-color");
 const settingOpen = document.querySelector(".settings_open");
 const changeColorBox = document.querySelector(".change_color_box");
-const btnEditeColorClose = document.querySelector(".qr-edite_color_close");
-const btnEditeColorSave = document.querySelector(".qr-edite_color_save");
 const textHeaderEl = document.querySelector(".text-header");
 const textHeaderWrapperEl = document.querySelector(".text_wrapper");
 const textSecondaryEl = document.querySelector(".text-secondary");
@@ -45,20 +43,20 @@ const pickr = Pickr.create({
   showAlways: true,
 
   swatches: [
-    "rgba(244, 67, 54, 1)",
-    "rgba(233, 30, 99, 0.95)",
-    "rgba(156, 39, 176, 0.9)",
-    "rgba(103, 58, 183, 0.85)",
-    "rgba(63, 81, 181, 0.8)",
-    "rgba(33, 150, 243, 0.75)",
-    "rgba(3, 169, 244, 0.7)",
-    "rgba(0, 188, 212, 0.7)",
-    "rgba(0, 150, 136, 0.75)",
-    "rgba(76, 175, 80, 0.8)",
-    "rgba(139, 195, 74, 0.85)",
-    "rgba(205, 220, 57, 0.9)",
-    "rgba(255, 235, 59, 0.95)",
-    "rgba(255, 193, 7, 1)",
+    "#F44336",
+    "#E91E63",
+    "#9C27B0",
+    "#673AB7",
+    "#3F51B5",
+    "#2196F3",
+    "#03A9F4",
+    "#00BCD4",
+    "#009688",
+    "#4CAF50",
+    "#8BC34A",
+    "#CDDC39",
+    "#FFEB3B",
+    "#FFC107",
   ],
 
   components: {
@@ -84,6 +82,8 @@ const newBlock = document.createElement("div");
 newBlock.classList.add("my-block");
 
 newBlock.innerHTML = `
+<div class="added_color_box">
+</div>
       <div class="manager_changes_box">
       <button class="btn_secondary manager_changes_btn manager_changes_cancel">Отмена</button>
         <button class="btn_secondary manager_changes_btn manager_changes_save">Сохранить</button>
@@ -118,8 +118,12 @@ function handleFileSelect(event) {
   reader.readAsDataURL(file);
 }
 
+let addedColors = [];
+let lastColor = undefined;
+
 //Устанавливаем цвет для выбранного элемента
 function setColor(hexColor) {
+  lastColor = hexColor;
   if (selectElement == "border-QR") {
     qrIconEl.style.borderColor = hexColor;
   } else if (selectElement == "icon-QR") {
@@ -162,6 +166,7 @@ const btnSettingIconQr = document.querySelector(".setting_icon_qr");
 const selectElementBtnAll = document.querySelectorAll(".select_element_btn");
 const changesSaveBtn = document.querySelector(".manager_changes_save");
 const changesCancelBtn = document.querySelector(".manager_changes_cancel");
+const addedColorBox = document.querySelector(".added_color_box");
 
 //Открыть панель выбора элемента
 function openPanelSelectEl() {
@@ -224,6 +229,7 @@ function closePanelPalette() {
 //Установить значения в предыдущие натсройки
 function setPreviousSettings() {
   console.log("Установить значения в предыдущие натсройки");
+  console.log(selectElement);
   previousSettings.border.color = qrIconEl.style.borderColor;
   previousSettings.icon.color = qrIconEl.style.color;
   previousSettings.header.color = textHeaderEl.style.color;
@@ -253,6 +259,39 @@ function closePopup() {
   popupBox.classList.remove("visible");
   maskEl.classList.remove("visible");
   bodyEl.classList.remove("overflow");
+}
+
+function addLastColor() {
+  if (
+    !addedColors.includes(lastColor) &&
+    !pickr.options.swatches.includes(lastColor)
+  ) {
+    if (addedColors.length < 7) {
+      addedColors.push(lastColor);
+      addedColors.forEach((clr) => {
+        if (
+          !addedColorBox.querySelector(`.added_color_btn[data-color="${clr}"]`)
+        ) {
+          const btn = document.createElement("button");
+          btn.classList.add("added_color_btn");
+          btn.setAttribute("data-color", clr);
+          btn.style.backgroundColor = clr;
+          addedColorBox.appendChild(btn);
+        }
+      });
+    } else {
+      addedColors[0] = lastColor;
+      addedColors.forEach((clr) => {
+        if (
+          !addedColorBox.querySelector(`.added_color_btn[data-color="${clr}"]`)
+        ) {
+          const firstBtn = addedColorBox.querySelector(".added_color_btn");
+          firstBtn.dataset.color = clr;
+          firstBtn.style.backgroundColor = clr;
+        }
+      });
+    }
+  }
 }
 
 // ---СЛУШАТЕЛИ СОБЫТИЙ--- //
@@ -299,7 +338,7 @@ poster.addEventListener("load", () => {
 
 // При клике на canvas
 canvas.addEventListener("click", (e) => {
-  if (selectElement) {
+  if (selectElement && activeMenu == "PALETTE_MENU") {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -324,6 +363,10 @@ pickr.on("change", (color, instance) => {
 
 //Сохранить изменения в натсройках и закрыть панель
 changesSaveBtn.addEventListener("click", () => {
+  if (isChanges) {
+    addLastColor();
+    setPreviousSettings();
+  }
   closePanelPalette();
   if (selectElement !== "header" && selectElement !== "text") {
     openPanelSelectEl();
@@ -332,6 +375,24 @@ changesSaveBtn.addEventListener("click", () => {
     activeMenu = "MANAGE_SETTING_MENU";
     settingMenuBackBtn.classList.remove("hidden");
   }
+});
+
+addedColorBox.addEventListener("click", (event) => {
+  // Находим ближайший элемент с классом .added_color_btn, если он есть
+  const btn = event.target.closest(".added_color_btn");
+  console.log(btn, "btn");
+  console.log(btn, "event");
+  // Если клик произошёл не по кнопке, выходим
+  if (!btn) return;
+
+  console.log("Кнопка палитры");
+  isChanges = true;
+
+  // Если кнопке назначен id, его можно получить через btn.id
+  const hexColor = btn.getAttribute("data-color");
+  console.log("Выбранный цвет (HEX):", hexColor);
+
+  setColor(hexColor);
 });
 
 //Отменить изменения в настройках и закрыть панель
@@ -353,6 +414,7 @@ changesCancelBtn.addEventListener("click", () => {
 
 popupSaveBtn.addEventListener("click", () => {
   console.log("popupSaveBtn");
+  addLastColor();
   closePanelPalette();
   if (selectElement !== "header" && selectElement !== "text") {
     openPanelSelectEl();
@@ -401,6 +463,10 @@ document.addEventListener("click", (e) => {
     } else {
       closePanelPalette();
       closePanelSetting();
+      selectElement = undefined;
+      activeMenu = undefined;
+      isChanges = false;
+      lastColor = undefined;
     }
   }
 });
@@ -448,7 +514,7 @@ managerSettingDeleteBtn.addEventListener("click", () => {
   managerSettingColorBtn.classList.add("disabled");
 });
 
-settingMenuBackBtn.addEventListener("click", () => {
+settingMenuBackBtn.addEventListener("click", (event) => {
   if (activeMenu == "MANAGE_SETTING_MENU") {
     managerSettingBox.classList.add("hidden");
     selectElement = undefined;

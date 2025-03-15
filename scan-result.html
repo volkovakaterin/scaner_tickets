@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
-    <title>FlyTicket</title>
+    <title>FlyTick</title>
   </head>
   <body>
     <header class="header">
@@ -50,22 +50,28 @@
           </defs>
         </svg>
       </button>
-      <div class="logo">FlyTicket</div>
+      <div class="logo">FlyTick</div>
     </header>
-    <section>
-      <img src="/assets/picture/qr_picture.png" class="qr_picture" />
-      <h1 class="title">
-        Проверяйте билеты <span>быстро</span> и <span>просто</span>
-      </h1>
-      <p class="prompt">
-        Наведите камеру на QR-код или загрузите скриншот самого QR-кода
-      </p>
-      <div class="btn_scan_wrapper">
-        <button id="scan" class="btn_primary btn_scan">
-          Перейти к сканированию
-        </button>
+    <section class="scan-result">
+      <div class="success-result hidden">
+        <div class="success-message">Билет актуален! Welcome!</div>
+        <!-- <div class="success-title">Билет актуален!</div> -->
+        <div class="tickets-img"></div>
+      </div>
+      <div class="error-result hidden">
+        <div class="error-message">Билет не найден! Может пришли не туда? Обратитесь к администратору</div>
+        <!-- <div class="error-title">Билет не найден!</div> -->
+        <div class="error-img"></div>
+      </div>
+      <div class="warning-result hidden">
+        <div class="warning-message">Время входа прошло! За опоздание придется платить... Обратитесь к администратору</div>
+        <!-- <div class="warning-title">Время входа прошло!</div> -->
+        <div class="warning-img"></div>
+      </div>
+      <div class="back_scan_wrapper">
+        <button class="btn_primary">Вернуться к сканированию</button>
       </div>
     </section>
-    <script src="/index.js"></script>
+    <script src="/scan-result.js"></script>
   </body>
 </html>

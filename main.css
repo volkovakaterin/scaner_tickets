@@ -1,6 +1,7 @@
 @import "styles/normalize.css";
 @import "styles/reset.css";
 @import "styles/create-flyer.css";
+@import "styles/scan-result.css";
 
 @font-face {
   font-family: "Roboto-Regular";
@@ -26,11 +27,63 @@
   src: url("./fonts/Roboto-Black.ttf");
 }
 
+@font-face {
+  font-family: "HomeVideo-Regular";
+  font-weight: 400;
+  src: url("./fonts/HomeVideo-Regular.otf");
+}
+
+@font-face {
+  font-family: "HomeVideo-Bold";
+  font-weight: 700;
+  src: url("./fonts/HomeVideo-Bold.otf");
+}
+
+@font-face {
+  font-family: "GALS";
+  font-weight: 400;
+  src: url("./fonts/GALS.ttf");
+}
+
+@font-face {
+  font-family: "Akony";
+  font-weight: 600;
+  src: url("./fonts/AKONY.ttf");
+}
+
+@font-face {
+  font-family: "Zekton";
+  font-weight: 600;
+  src: url("./fonts/zekton.ttf");
+}
+
+@font-face {
+  font-family: "Exo2-Black";
+  font-weight: 900;
+  src: url("./fonts/Exo2-Black.ttf");
+}
+
+@font-face {
+  font-family: "Exo2-Bold";
+  font-weight: 600;
+  src: url("./fonts/Exo2-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Exo2-Regular";
+  font-weight: 400;
+  src: url("./fonts/Exo2-Regular.ttf");
+}
+
 :root {
   --primary-blue: #2c75ff;
   --accent-green: #2cff75;
   --accent-cyan: #2cefff;
   --accent-purple: #704cff;
+  --accent-red: #ff2c4c;
+  --orange-bold: #ff6c2c;
+  --orange-medium: #FF7C2C;
+  --orange-light: #FF9C2C;
   --text-light: #ffffff;
   --text-grey: #eeeeee;
   --text-grey-2: #eeeeeeab;
@@ -46,7 +99,7 @@
 }
 
 body {
-  font-family: "Roboto-Regular";
+  font-family: "Exo2-Regular";
   background: var(--bs-body-bg);
   margin: 0;
   padding: 0;
@@ -75,8 +128,8 @@ header {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  font-size: 25px;
-  font-family: "Roboto-Black";
+  font-size: 20px;
+  font-family: "Akony";
 }
 
 section {
@@ -84,17 +137,21 @@ section {
 }
 
 .title {
+  white-space: normal;
+  word-wrap: break-word;
   margin-top: 80px;
-  font-family: "Roboto-Bold";
-  font-size: 45px;
+  font-family: "Zekton";
+  font-size: 55px;
 }
 
 .title span {
   color: var(--primary-blue);
+  text-shadow: 6px 0px 10px rgba(44,117,255,0.9);
 }
 
 header .back,
-.setting-menu_close, .setting-menu_back{
+.setting-menu_close,
+.setting-menu_back {
   padding: 5px;
   width: 38px;
   height: 38px;
@@ -105,7 +162,8 @@ header .back,
 }
 
 .brd_grd,
-.setting-menu_close, .setting-menu_back {
+.setting-menu_close,
+.setting-menu_back {
   border: 2px solid transparent;
   background: linear-gradient(var(--bs-body-bg), var(--bs-body-bg)) padding-box,
     linear-gradient(
@@ -160,7 +218,7 @@ header .back,
   padding: 13px 20px;
   border-radius: var(--bs-btn-border-radius);
   cursor: pointer;
-  font-family: "Roboto-Medium";
+ font-family: "Zekton";
   font-size: 18px;
   margin: auto;
   margin-top: 50px;
@@ -169,7 +227,7 @@ header .back,
 
 .btn_secondary {
   cursor: pointer;
-  font-family: "Roboto-Medium";
+  font-family: "Zekton";
   font-size: 18px;
   color: var(--text-dark);
   border: 2px solid transparent;
@@ -209,8 +267,8 @@ header .back,
   top: 0;
   left: 0;
   z-index: 11000;
-  width: 100%;
-  height: 100vh;
+  width: 0;
+  height: 0;
   background-color: var(--bs-mask-bg);
   opacity: 0;
   pointer-events: none;
@@ -219,6 +277,8 @@ header .back,
 }
 
 .mask.visible {
+  width: 100%;
+  height: 100vh;
   opacity: 0.8;
   pointer-events: auto;
 }
@@ -263,7 +323,7 @@ header .back,
 
 .popup_text {
   font-size: 20px;
-  font-family: "Roboto-Medium";
+  font-family: "Exo2-Regular";
   color: var(--text-dark);
   text-align: center;
 }

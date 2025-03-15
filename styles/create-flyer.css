@@ -85,17 +85,15 @@
 .create_flyer .qr-icon {
   position: relative;
   width: 60%;
-  /* aspect-ratio: 1 / 1; */
   border: 5px solid var(--primary-blue);
   border-radius: 20px;
-  /* padding: 25px; */
   color: #333;
 }
 
 .qr-icon::before {
   content: "";
   display: block;
-  padding-top: 100%; /* соотношение 1:1 */
+  padding-top: 100%;
 }
 
 .create_flyer .qr-icon svg {
@@ -179,7 +177,7 @@
 .create_flyer .text-header {
   color: var(--primary-blue);
   font-size: 25px;
-  font-family: "Roboto-Black";
+  font-family: "Exo2-Bold";
   text-align: center;
   white-space: normal;
   word-wrap: break-word;
@@ -228,11 +226,12 @@
 }
 
 .manager_changes_box {
-  padding: 5px;
+  padding: 5px 0.6em;
 }
 
 .setting-menu {
   position: fixed;
+  z-index: 10;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
@@ -252,6 +251,7 @@
 
 .edit_text_box {
   position: fixed;
+  z-index: 10;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
@@ -269,7 +269,8 @@
   transition: all 0.2s linear 0s;
 }
 
-.setting-menu.hidden, .edit_text_box.hidden {
+.setting-menu.hidden,
+.edit_text_box.hidden {
   left: -100%;
   max-width: 0;
   opacity: 0;
@@ -285,24 +286,24 @@
   border: 1px solid var(--bs-body-bg);
 }
 
-.edit_text_warning  {
+.edit_text_warning {
   font-size: 12px;
   width: 100%;
   color: var(--text-grey-2);
   opacity: 1;
   transition: 0.2s;
-  }
+}
 
 .edit_text_warning.hidden {
-opacity: 0;
+  opacity: 0;
 }
 
 .edit_text_btns {
-display: flex;
-align-items: center;
-justify-content: space-between;
-width: 100%;
-margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .select_element_box,
@@ -312,7 +313,7 @@ margin-top: 10px;
   flex-direction: column;
   align-items: center;
   width: 100%;
- margin-top: 10px;
+  margin-top: 10px;
   opacity: 1;
   pointer-events: auto;
   -webkit-transition: all 0.2s linear 0s;
@@ -321,9 +322,7 @@ margin-top: 10px;
 
 .select_element_box.hidden,
 .manager_setting_box.hidden,
-.setting-menu_back.hidden,
-.create_flyer .text-secondary.hidden,
-.text-header.hidden {
+.setting-menu_back.hidden {
   width: 0;
   height: 0;
   border: none;
@@ -333,20 +332,25 @@ margin-top: 10px;
   pointer-events: none;
 }
 
+.text-header.hidden,
+.create_flyer .text-secondary.hidden {
+  display: none;
+}
+
 .setting-menu_back {
   opacity: 1;
   pointer-events: auto;
   -webkit-transition: all 0.2s linear 0s;
   transition: all 0.2s linear 0s;
 }
- 
 
-.setting-menu_close, .setting-menu_back  {
+.setting-menu_close,
+.setting-menu_back {
   margin-bottom: 20px;
 }
 
-
-.select_element_btn, .manager_setting_btn {
+.select_element_btn,
+.manager_setting_btn {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -355,16 +359,17 @@ margin-top: 10px;
   padding: 0;
 }
 
-.select_element_btn_text, .manager_setting_btn_text{
+.select_element_btn_text,
+.manager_setting_btn_text {
   color: var(--text-light);
   font-size: 14px;
   max-width: 100%;
-  white-space: normal;   /* позволяет перенос слов */
+  white-space: normal; /* позволяет перенос слов */
   word-wrap: break-word;
 }
 
-.select_element_btn_icon, .manager_setting_btn_icon
-{
+.select_element_btn_icon,
+.manager_setting_btn_icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -374,13 +379,15 @@ margin-top: 10px;
 }
 
 .select_element_btn_icon svg,
-.select_element_btn_icon svg path, 
-.manager_setting_delete svg, 
+.select_element_btn_icon svg path,
+.manager_setting_delete svg,
 .manager_setting_delete svg path {
   stroke: currentColor;
 }
 
-.manager_setting_color svg path, .manager_setting_color svg, .manager_setting_edit svg path {
+.manager_setting_color svg path,
+.manager_setting_color svg,
+.manager_setting_edit svg path {
   fill: currentColor;
 }
 
@@ -390,7 +397,7 @@ margin-top: 10px;
 
 .select_element_box .btn_secondary,
 .manager_changes_box .btn_secondary,
-.edit_text_btns  .btn_secondary {
+.edit_text_btns .btn_secondary {
   font-size: 14px;
   padding: 5px;
   border-radius: 5px;
@@ -413,8 +420,28 @@ margin-top: 10px;
 }
 
 .manager_setting_delete.disabled,
-.manager_setting_color.disabled
- {
+.manager_setting_color.disabled {
   opacity: 0.4;
   pointer-events: none;
+}
+
+.added_color_box {
+  padding: 0 0.6em;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.added_color_btn {
+  font-size: 1em;
+  width: calc(1.75em - 5px);
+  height: calc(1.75em - 5px);
+  border-radius: 0.15em;
+  cursor: pointer;
+  margin: 2.5px;
+  flex-shrink: 0;
+  justify-self: center;
+  transition: all 0.15s;
+  overflow: hidden;
 }
