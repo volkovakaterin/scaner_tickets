@@ -136,12 +136,21 @@ section {
   padding: 0 20px 20px;
 }
 
+.landing-scan_section {
+  padding-top: 50px;
+  height: calc(100vh - 58px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around
+}
+
 .title {
   white-space: normal;
   word-wrap: break-word;
-  margin-top: 80px;
+  margin-top: 40px;
   font-family: "Zekton";
-  font-size: 55px;
+  font-size: 35px;
 }
 
 .title span {
@@ -198,11 +207,9 @@ header .back,
 }
 
 .qr_picture {
-  width: 80%;
+  width: 60%;
   height: auto;
   aspect-ratio: 1;
-  margin: auto;
-  margin-top: 50px;
 }
 
 .btn_primary {
