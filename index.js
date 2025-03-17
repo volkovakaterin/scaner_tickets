@@ -483,6 +483,7 @@ selectElementBtnAll.forEach((btn) => {
         managerSettingDeleteBtn.classList.remove("disabled");
         managerSettingColorBtn.classList.remove("disabled");
       }
+      textHeaderWrapperEl.scrollIntoView({ behavior: "smooth" });
     } else if (selectElement == "text") {
       if (textSecondaryEl.classList.contains("hidden")) {
         managerSettingDeleteBtn.classList.add("disabled");
@@ -491,6 +492,7 @@ selectElementBtnAll.forEach((btn) => {
         managerSettingDeleteBtn.classList.remove("disabled");
         managerSettingColorBtn.classList.remove("disabled");
       }
+      textHeaderWrapperEl.scrollIntoView({ behavior: "smooth" });
     }
     openPanelManageSetting();
   });
