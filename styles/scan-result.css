@@ -167,39 +167,51 @@ color:var(--bs-body-bg);
   }
   
   .cell:nth-child(1) {
-    --cell-color: #00FF87;
+    /* --cell-color: #00FF87; */
+    --cell-color: var(--accent-purple);
+    
   }
   
   .cell:nth-child(2) {
-    --cell-color: #0CFD95;
+    /* --cell-color: #0CFD95; */
+    --cell-color: #6354FF; 
   }
   
   .cell:nth-child(3) {
-    --cell-color: #17FBA2;
+    /* --cell-color: #17FBA2; */
+    --cell-color: #5060FF;
   }
   
   .cell:nth-child(4) {
-    --cell-color: #23F9B2;
+    /* --cell-color: #23F9B2; */
+    --cell-color: #3C6BFF;
   }
   
   .cell:nth-child(5) {
-    --cell-color: #30F7C3;
+    /* --cell-color: #30F7C3; */
+    --cell-color: #2CA1FF;
+    
   }
   
   .cell:nth-child(6) {
-    --cell-color: #3DF5D4;
+    /* --cell-color: #3DF5D4; */
+    --cell-color: #2BBCFE;
   }
   
   .cell:nth-child(7) {
-    --cell-color: #45F4DE;
+    /* --cell-color: #45F4DE; */
+    --cell-color: var( --accent-cyan);
   }
   
   .cell:nth-child(8) {
-    --cell-color: #53F1F0;
+    /* --cell-color: #53F1F0; */
+    --cell-color: #2CF5CB;
   }
   
   .cell:nth-child(9) {
-    --cell-color: #60EFFF;
+    /* --cell-color: #60EFFF; */
+    --cell-color: var(--accent-green);
+    
   }
   
   /*Animation*/
